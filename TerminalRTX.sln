@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.128
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerminalRTX", "TerminalRTX\TerminalRTX.csproj", "{0A908F90-3A4B-4B63-857A-634D87291EC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A908F90-3A4B-4B63-857A-634D87291EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A908F90-3A4B-4B63-857A-634D87291EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A908F90-3A4B-4B63-857A-634D87291EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A908F90-3A4B-4B63-857A-634D87291EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29F21F87-F297-4DB9-83BC-468B4077CAA4}
+	EndGlobalSection
+EndGlobal
