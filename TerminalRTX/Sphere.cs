@@ -27,5 +27,10 @@ namespace TerminalRTX
 
             return position + direction * (float)distance;
         }
+
+        public Vector3 GetNormal(Vector3 point)
+        {
+            return Vector3.Normalize(point - Center);
+        }
     }
 }

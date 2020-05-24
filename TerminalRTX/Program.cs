@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace TerminalRTX
 {
@@ -25,8 +25,17 @@ namespace TerminalRTX
                         Radius = 3,
                         Material = new RenderMaterial
                         {
-                            DiffuseColor = new Vector3(0.2f, 0, 0)
+                            DiffuseColor = new Vector3(0.2f, 0, 0),
+                            SpecularExponent = 40
                         }
+                    }
+                },
+                Lights = new PointLight[]
+                {
+                    new PointLight
+                    {
+                        Position = new Vector3(3, -2, -3),
+                        Intensity = 5
                     }
                 }
             };
@@ -85,12 +94,32 @@ namespace TerminalRTX
 
             if (closestObject != null)
             {
-                return closestObject.Material.DiffuseColor;
+                var normal = closestObject.GetNormal(closestIntersect.Value);
+                float diffuseLightIntensity = 0f;
+                float specularLightIntensity = 0f;
+                foreach (var light in scene.Lights)
+                {
+                    var lightDirection = Vector3.Normalize(light.Position - closestIntersect.Value);
+                    
+                    diffuseLightIntensity += light.Intensity * (float)Math.Max(0, Vector3.Dot(lightDirection, normal));
+
+                    specularLightIntensity += (float)Math.Pow(Math.Max(0, Vector3.Dot(Reflect(lightDirection, normal), lightDirection)), closestObject.Material.SpecularExponent) * light.Intensity;
+                }
+                var diffuseComponent = closestObject.Material.DiffuseColor * diffuseLightIntensity * 0.5f;
+                var specularComponent = Vector3.One * specularLightIntensity * 0.3f;
+
+                return diffuseComponent + specularComponent;
             }
             else
             {
                 return new Vector3(0.2f, 0.5f, 0.5f);
             }
+        }
+
+        private static Vector3 Reflect(Vector3 lightDirection, Vector3 normal)
+        {
+            var dot = Vector3.Dot(lightDirection, normal);
+            return (lightDirection - (normal * 2f * dot)) * -1f;
         }
 
         //public static void Render()
